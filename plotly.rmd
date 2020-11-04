@@ -1,0 +1,60 @@
+---
+title: "plotly"
+output: 
+  html_document:
+    toc: true
+    toc_float: true
+---
+
+# Cleaning Data
+
+We are gonna look at the instacart data and only look at the sales conditions of types of water
+
+```{r}
+library(tidyverse)
+library(plotly)
+library(p8105.datasets)
+```
+
+```{r}
+data("instacart")
+instacart = 
+  instacart %>%
+  select(product_name, reordered, days_since_prior_order, order_dow, order_hour_of_day, department) %>%
+  filter(
+    reordered == 1,
+    department == "beverages",
+    str_detect(product_name,"water")
+  )
+```
+
+# plotly
+
+## Scatterplot
+```{r}
+instacart %>%
+  plot_ly(
+    x = ~order_hour_of_day, y = ~days_since_prior_order, type = "scatter", mode = "markers",
+    color = ~product_name, alpha = 0.5)
+```
+
+
+## boxplot
+
+```{r}
+instacart %>% 
+  mutate(product_name = fct_reorder(product_name, days_since_prior_order)) %>%
+  plot_ly(y = ~days_since_prior_order, color = ~product_name, type = "box", colors = "viridis")
+```
+
+
+## barchart
+
+```{r}
+instacart %>% 
+  count(product_name) %>% 
+  top_n(10,n) %>% 
+  mutate(product_name = fct_reorder(product_name, n)) %>% 
+  plot_ly(x = ~product_name, y = ~n, color = ~product_name, type = "bar", colors = "viridis")
+```
+

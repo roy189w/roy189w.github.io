@@ -1,0 +1,61 @@
+---
+title: "Dashboard"
+output: 
+  flexdashboard::flex_dashboard:
+    orientation: columns
+    vertical_layout: fill
+    source: embed
+---
+
+```{r setup, include=FALSE}
+library(flexdashboard)
+library(tidyverse)
+library(plotly)
+library(p8105.datasets)
+```
+
+```{r}
+data("instacart")
+instacart = 
+  instacart %>%
+  select(product_name, reordered, days_since_prior_order, order_dow, order_hour_of_day, department) %>%
+  filter(
+    reordered == 1,
+    department == "beverages",
+    str_detect(product_name,"water")
+  )
+```
+
+Column {data-width=650}
+-----------------------------------------------------------------------
+
+### Scatter
+
+```{r}
+instacart %>%
+  plot_ly(
+    x = ~order_hour_of_day, y = ~days_since_prior_order, type = "scatter", mode = "markers",
+    color = ~product_name, alpha = 0.5)
+```
+
+Column {data-width=350}
+-----------------------------------------------------------------------
+
+### Boxplot
+
+```{r}
+instacart %>% 
+  mutate(product_name = fct_reorder(product_name, days_since_prior_order)) %>%
+  plot_ly(y = ~days_since_prior_order, color = ~product_name, type = "box", colors = "viridis")
+```
+
+### Barchart
+
+```{r}
+instacart %>% 
+  count(product_name) %>% 
+  top_n(10,n) %>% 
+  mutate(product_name = fct_reorder(product_name, n)) %>% 
+  plot_ly(x = ~product_name, y = ~n, color = ~product_name, type = "bar", colors = "viridis")
+```
+
