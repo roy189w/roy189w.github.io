@@ -8,14 +8,10 @@ output:
 
 # Home page
 
-Welcome to Roy's corner, you will know more about me here.
+Welcome to Roy's corner, you will know more about me here. I am a MPH student at Columbia University and I am currently living in China right now.
 
 ![](images/corner.jpeg)
 
-## Links
-Links to more info
+## Resume
 
-* [Github](https://github.com/roy189w)
-
-# Link to About me
-[About me](about.html)
+* [Resume](about.html)

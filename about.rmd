@@ -6,4 +6,6 @@ output:
     toc_float: true
 ---
 
-#This is the resume page
+# This is the resume page
+
+![](images/resume.png)
