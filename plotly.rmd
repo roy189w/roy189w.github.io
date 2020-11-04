@@ -35,7 +35,8 @@ instacart =
 instacart %>%
   plot_ly(
     x = ~order_hour_of_day, y = ~days_since_prior_order, type = "scatter", mode = "markers",
-    color = ~product_name, alpha = 0.5)
+    color = ~product_name, alpha = 0.5) %>% 
+  layout(showlegend = TRUE, legend = list(font = list(size = 5))) 
 ```
 
 
@@ -44,7 +45,8 @@ instacart %>%
 ```{r}
 instacart %>% 
   mutate(product_name = fct_reorder(product_name, days_since_prior_order)) %>%
-  plot_ly(y = ~days_since_prior_order, color = ~product_name, type = "box", colors = "viridis")
+  plot_ly(y = ~days_since_prior_order, color = ~product_name, type = "box", colors = "viridis") %>% 
+  layout(showlegend = TRUE, legend = list(font = list(size = 5))) 
 ```
 
 
@@ -55,6 +57,7 @@ instacart %>%
   count(product_name) %>% 
   top_n(10,n) %>% 
   mutate(product_name = fct_reorder(product_name, n)) %>% 
-  plot_ly(x = ~product_name, y = ~n, color = ~product_name, type = "bar", colors = "viridis")
+  plot_ly(x = ~product_name, y = ~n, color = ~product_name, type = "bar", colors = "viridis") %>% 
+  layout(showlegend = TRUE, legend = list(font = list(size = 5))) 
 ```
 
