@@ -6,18 +6,16 @@ output:
     toc_float: true
 ---
 
-# This page is the landing page
+# Home page
 
 Welcome to Roy's corner, you will know more about me here.
+
+![](images/corner.jpeg)
 
 ## Links
 Links to more info
 
 * [Github](https://github.com/roy189w)
-* [Email](roy189w@hotmail.com)
-
-## Local Image
-![](images/corner.jpeg)
 
 # Link to About me
 [About me](about.html)
